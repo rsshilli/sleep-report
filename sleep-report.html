@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Analysis Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-error-bars@4.4.5/build/index.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .stats-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #4CAF50;
+        }
+        .stat-label {
+            font-size: 0.85em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .day-stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .day-stats-table th,
+        .day-stats-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .day-stats-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 600;
+        }
+        .day-stats-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .day-stats-table td:not(:first-child) {
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>💤 Sleep Analysis Report</h1>
+    <p class="subtitle">Analysis of 117 nights of sleep across September-December 2025</p>
+    
+    <div class="stats-container">
+        <h2>Overall Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Nights</div>
+                <div class="stat-value">117</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Average Sleep</div>
+                <div class="stat-value">7.18 hrs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Standard Deviation</div>
+                <div class="stat-value">1.52 hrs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Min Sleep</div>
+                <div class="stat-value">3.05 hrs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Max Sleep</div>
+                <div class="stat-value">11.68 hrs</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h2>Average Sleep by Day of Week</h2>
+        <canvas id="sleepChart"></canvas>
+    </div>
+
+    <div class="stats-container">
+        <h2>Detailed Statistics by Day of Week</h2>
+        <table class="day-stats-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Count</th>
+                    <th>Average</th>
+                    <th>Std Dev</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td><strong>Sunday</strong></td>
+                    <td>17</td>
+                    <td>7.80 hrs</td>
+                    <td>0.98 hrs</td>
+                    <td>6.37 hrs</td>
+                    <td>10.43 hrs</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Monday</strong></td>
+                    <td>18</td>
+                    <td>6.47 hrs</td>
+                    <td>1.60 hrs</td>
+                    <td>3.05 hrs</td>
+                    <td>9.42 hrs</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Tuesday</strong></td>
+                    <td>17</td>
+                    <td>7.02 hrs</td>
+                    <td>1.51 hrs</td>
+                    <td>4.88 hrs</td>
+                    <td>10.72 hrs</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Wednesday</strong></td>
+                    <td>17</td>
+                    <td>5.94 hrs</td>
+                    <td>1.08 hrs</td>
+                    <td>3.85 hrs</td>
+                    <td>7.88 hrs</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Thursday</strong></td>
+                    <td>17</td>
+                    <td>7.16 hrs</td>
+                    <td>1.23 hrs</td>
+                    <td>5.08 hrs</td>
+                    <td>9.50 hrs</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Friday</strong></td>
+                    <td>15</td>
+                    <td>7.83 hrs</td>
+                    <td>1.59 hrs</td>
+                    <td>5.28 hrs</td>
+                    <td>11.68 hrs</td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Saturday</strong></td>
+                    <td>16</td>
+                    <td>8.19 hrs</td>
+                    <td>1.13 hrs</td>
+                    <td>6.57 hrs</td>
+                    <td>10.08 hrs</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Register the error bars plugin
+        Chart.register(ChartErrorBars.BarWithErrorBarsController, ChartErrorBars.BarWithErrorBar);
+        
+        const ctx = document.getElementById('sleepChart').getContext('2d');
+        
+        // Data arrays
+        const averages = [7.795098039215685,6.469444444444445,7.020588235294118,5.937254901960785,7.158823529411764,7.833333333333334,8.191666666666666];
+        const stdDevs = [0.9849980044749761,1.599163072004915,1.5099834372524172,1.0782388419939561,1.2320093270466854,1.5887684492037173,1.1306186851061286];
+        
+        // Format data with error bars
+        const chartData = averages.map((avg, i) => ({
+            y: avg,
+            yMin: avg - stdDevs[i],
+            yMax: avg + stdDevs[i]
+        }));
+        
+        const sleepChart = new Chart(ctx, {
+            type: ChartErrorBars.BarWithErrorBarsController.id,
+            data: {
+                labels: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+                datasets: [{
+                    label: 'Average Sleep Hours',
+                    data: chartData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(199, 199, 199, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(199, 199, 199, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const stdDev = stdDevs[context.dataIndex];
+                                const avg = averages[context.dataIndex];
+                                return [
+                                    'Average: ' + avg.toFixed(2) + ' hours',
+                                    'Std Dev: ±' + stdDev.toFixed(2) + ' hours',
+                                    'Range: ' + (avg - stdDev).toFixed(2) + ' - ' + (avg + stdDev).toFixed(2) + ' hrs'
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Hours of Sleep',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(1) + ' hrs';
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Day of Week',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

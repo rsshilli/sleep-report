@@ -1,0 +1,15 @@
+{
+  "name": "sleeprecords",
+  "version": "1.0.0",
+  "description": "Analyze Ryan's CPAP sleep records",
+  "main": "index.js",
+  "scripts": {
+    "analyze": "node analyzeSleep.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Shillington",
+  "license": "MIT",
+  "dependencies": {
+    "dayjs": "^1.11.19"
+  }
+}
