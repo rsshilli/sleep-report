@@ -176,7 +176,7 @@ const html = `<!DOCTYPE html>
     </style>
 </head>
 <body>
-    <h1>💤 Sleep Analysis Report</h1>
+    <h1>💤 Ryan's Sleep Analysis Report</h1>
     <p class="subtitle">Analysis of ${allHours.length} nights of sleep across September-December 2025</p>
     
     <div class="stats-container">
